@@ -13,4 +13,11 @@ export const loginReducers = createReducer(initialState, {
       isLoggedIn: action.info,
     };
   },
+  [types.USER_REGISTRATION_SUCCESS](state, action) {
+    console.log("reducersss", action);
+    return {
+      ...state,
+      isLoggedIn: action.info,
+    };
+  },
 });

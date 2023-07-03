@@ -22,7 +22,7 @@ import useResponsive from "../../../hooks/useResponsive";
 import Logo from "../../../components/logo";
 import Iconify from "../../../components/iconify";
 import BackgroundImage from "../../../assets/images/background/login-bg.png";
-import { testAction } from "../actions";
+import { userLoginRequest } from "../actions";
 
 // ----------------------------------------------------------------------
 const StyledRoot = styled("div")(({ theme }) => ({
@@ -63,14 +63,16 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSignupClick = () => {
     navigate("/signup");
   };
 
-  const testLogin = useCallback(
+  const userLogin = useCallback(
     (info) => {
-      dispatch(testAction(info));
+      dispatch(userLoginRequest(info));
     },
     [dispatch]
   );
@@ -93,11 +95,20 @@ export default function LoginPage() {
             </Typography>
 
             <Stack spacing={3}>
-              <TextField name="email" label="Email address" />
+              <TextField
+                name="email"
+                label="Email address"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
 
               <TextField
                 name="password"
                 label="Password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
                 type={showPassword ? "text" : "password"}
                 InputProps={{
                   endAdornment: (
@@ -141,7 +152,7 @@ export default function LoginPage() {
               variant="contained"
               color="primary"
               onClick={() => {
-                testLogin(true);
+                userLogin({ email, password });
               }}
             >
               Login

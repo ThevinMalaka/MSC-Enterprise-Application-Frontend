@@ -7,6 +7,9 @@
 import { takeLatest } from "redux-saga/effects";
 
 import * as types from "../actionTypes";
-import { testFunction } from "./loginSaga";
+import { userRegistrationFunction, userLoginFunction } from "./loginSaga";
 
-export const loginSaga = [takeLatest(types.TEST_ACTION, testFunction)];
+export const loginSaga = [
+  takeLatest(types.USER_REGISTRATION_REQUEST, userRegistrationFunction),
+  takeLatest(types.USER_LOGIN_REQUEST, userLoginFunction),
+];
