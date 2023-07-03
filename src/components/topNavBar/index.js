@@ -1,40 +1,5 @@
-// import { Row } from "react-bootstrap";
-// import { useTranslation } from "react-i18next";
-// import { NavLink } from "react-router-dom";
-// import HomeIcon from "@mui/icons-material/Home";
-
-// import LogoUrl from "../../assets/images/logo/logo.png";
-// import {
-//   TopNavBarContainer,
-//   NavigationLinksContainer,
-// } from "./topNavBar.style";
-// import { Typography } from "@mui/material";
-
-// const TopNavBar = () => {
-//   const { t } = useTranslation();
-//   return (
-//     <TopNavBarContainer>
-//       <Row>
-//         <NavigationLinksContainer>
-//           <NavLink to="/" activeClassName="active">
-//             <HomeIcon />
-//             <span class="nav-text">Home</span>
-//           </NavLink>
-//           <NavLink to="/products" activeClassName="active">
-//             Products
-//           </NavLink>
-//           <NavLink to="/profile" activeClassName="active">
-//             Profile
-//           </NavLink>
-//         </NavigationLinksContainer>
-//       </Row>
-//     </TopNavBarContainer>
-//   );
-// };
-
-// export default TopNavBar;
-
 import * as React from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -51,6 +16,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { userLogoutRequest } from "../../views/login/actions";
 
 const drawerWidth = 240;
 const navItems = ["Home", "About", "Contact"];
@@ -58,6 +26,18 @@ const navItems = ["Home", "About", "Contact"];
 function DrawerAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(userLogoutRequest());
+    navigate("/");
+
+    // refresh the page
+    if (typeof window !== "undefined") {
+      window.location.reload();
+    }
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -133,7 +113,7 @@ function DrawerAppBar(props) {
               <Button
                 style={{ marginRight: 30 }}
                 onClick={() => {
-                  console.log("ssssss");
+                  handleLogout();
                 }}
                 sx={{ color: "#fff" }}
               >

@@ -13,6 +13,8 @@ import { getIsLoggedIn } from "./views/login/selectors";
 
 const App = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
+  const token = localStorage.getItem("token");
+  console.log("token------1111---", token);
   return (
     <>
       <ReduxToastr
@@ -26,12 +28,13 @@ const App = () => {
         progressBar
         closeOnToastrClick
       />
-      {!isLoggedIn ? (
+      {isLoggedIn || token ? (
         <Container fluid className="main-container">
           <Row>
             <Col>
-              <div className="main-router-container">
-                <UnauthorizedRouter />
+              <TopNavBar />
+              <div className="main-router-container" style={{ marginTop: 100 }}>
+                <AuthorizedRouter />
               </div>
             </Col>
           </Row>
@@ -40,9 +43,8 @@ const App = () => {
         <Container fluid className="main-container">
           <Row>
             <Col>
-              <TopNavBar />
-              <div className="main-router-container" style={{ marginTop: 100 }}>
-                <AuthorizedRouter />
+              <div className="main-router-container">
+                <UnauthorizedRouter />
               </div>
             </Col>
           </Row>

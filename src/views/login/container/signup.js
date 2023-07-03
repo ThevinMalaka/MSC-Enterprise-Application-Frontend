@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -9,6 +9,7 @@ import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { userRegistrationRequest } from "../actions";
+import { getUserRegistrationSuccess } from "../selectors";
 
 const StyledRoot = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -30,6 +31,13 @@ const StyledContent = styled("div")(({ theme }) => ({
 export default function RegistrationForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userRegistrationSuccess = useSelector(getUserRegistrationSuccess);
+
+  useEffect(() => {
+    if (userRegistrationSuccess) {
+      navigate("/"); // redirect to login page
+    }
+  }, [userRegistrationSuccess, navigate]);
 
   const [values, setValues] = useState({
     name: "",

@@ -15,7 +15,7 @@ export function* userRegistrationFunction(payload) {
     }
     toastr.clean(); // clean the previous toastr
     toastr.success("Success", "User registered successfully.");
-    yield loginAction.userRegistrationSuccess();
+    yield put(loginAction.userRegistrationSuccess());
     setTimeout(() => {
       toastr.clean(); //  clean the toastr after 3 seconds
     }, 4000);
@@ -40,7 +40,7 @@ export function* userLoginFunction(payload) {
     }
     toastr.clean(); // clean the previous toastr
     toastr.success("Success", "User logged in successfully.");
-    yield loginAction.userLoginSuccess();
+    yield put(loginAction.userLoginSuccess(data));
     setTimeout(() => {
       toastr.clean(); //  clean the toastr after 3 seconds
     }, 4000);

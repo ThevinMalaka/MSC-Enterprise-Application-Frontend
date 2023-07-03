@@ -63,3 +63,10 @@ export function userLoginFailed(info) {
     info,
   };
 }
+
+export function userLogoutRequest(info) {
+  return {
+    type: types.USER_LOGOUT_REQUEST,
+    info,
+  };
+}
