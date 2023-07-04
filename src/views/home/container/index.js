@@ -1,7 +1,16 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Grid, Container, Typography } from "@mui/material";
+import {
+  Grid,
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 import { workoutPlanEnrollRequest } from "../actions";
@@ -25,6 +34,29 @@ const HomeView = () => {
     },
     [dispatch]
   );
+
+  const mealPlan = [
+    {
+      id: 1,
+      items: [
+        {
+          id: 1,
+          name: "Meal 1",
+          servingSize: "1 cup",
+        },
+        {
+          id: 2,
+          name: "Meal 2",
+          servingSize: "1 cup",
+        },
+        {
+          id: 3,
+          name: "Meal 3",
+          servingSize: "1 cup",
+        },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -69,6 +101,37 @@ const HomeView = () => {
               icon={"ant-design:bug-filled"}
             />
           </Grid> */}
+
+          <Grid item xs={12} md={12} lg={12}>
+            <div>
+              <Typography variant="h5" gutterBottom>
+                Selected Meal Plan
+              </Typography>
+              <Grid container spacing={2}>
+                {mealPlan.map((meal, index) => (
+                  <Grid item xs={12} sm={6} md={6} key={index}>
+                    <Card>
+                      <CardContent>
+                        <Typography variant="h6" gutterBottom>
+                          Meal {index + 1}
+                        </Typography>
+                        <List>
+                          {meal.items.map((item, itemIndex) => (
+                            <ListItem key={itemIndex}>
+                              <ListItemText
+                                primary={item.name}
+                                secondary={`Serving Size: ${item.servingSize}`}
+                              />
+                            </ListItem>
+                          ))}
+                        </List>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
+          </Grid>
         </Grid>
       </Container>
     </>

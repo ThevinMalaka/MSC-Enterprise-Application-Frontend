@@ -88,6 +88,20 @@ const ActiveWorkoutView = () => {
                 <Typography variant="subtitle1" gutterBottom>
                   Notes: {workout.notes}
                 </Typography>
+
+                <Typography variant="h6" gutterBottom>
+                  Exercises
+                </Typography>
+                <List>
+                  {workout.exercises.map((exercise) => (
+                    <ListItem key={exercise.id}>
+                      <ListItemText
+                        primary={exercise.name}
+                        secondary={`Sets: ${exercise.sets}, Reps: ${exercise.reps}`}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
                 <img
                   src={workoutImage}
                   alt="workout"

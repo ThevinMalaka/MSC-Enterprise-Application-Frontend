@@ -64,7 +64,7 @@ const ActiveWorkoutView = () => {
   return (
     <Container>
       <Typography variant="h5" gutterBottom>
-        Day {id}
+        Day {id} Workout Plan
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={12} lg={4}>

@@ -31,6 +31,13 @@ const SelectedDay = Loadable(
 const Report = Loadable(
   lazy(() => import("../../views/home/container/report"))
 );
+const Meal = Loadable(lazy(() => import("../../views/home/container/meal")));
+const Prediction = Loadable(
+  lazy(() => import("../../views/home/container/prediction"))
+);
+const CheatMeal = Loadable(
+  lazy(() => import("../../views/home/container/cheatMeal"))
+);
 
 export function UnauthorizedRouter() {
   return useRoutes([
@@ -82,6 +89,18 @@ export function AuthorizedRouter() {
     {
       path: "/report",
       element: <Report />,
+    },
+    {
+      path: "/meal",
+      element: <Meal />,
+    },
+    {
+      path: "/prediction",
+      element: <Prediction />,
+    },
+    {
+      path: "/cheat-meal",
+      element: <CheatMeal />,
     },
     {
       path: "*",

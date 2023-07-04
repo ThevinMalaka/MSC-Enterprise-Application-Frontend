@@ -140,58 +140,6 @@ const WorkoutView = () => {
               ]}
             />
           </Grid>
-          <Grid item xs={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Workouts
-                </Typography>
-                {/* Render the list of workouts here */}
-                <ul>
-                  {workouts.map((workout) => (
-                    <li key={workout.id}>{workout.name}</li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Cheat Meals
-                </Typography>
-                {/* Render the list of cheat meals here */}
-                <ul>
-                  {cheatMeals.map((cheatMeal) => (
-                    <li key={cheatMeal.id}>{cheatMeal.name}</li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Add Workout
-                </Typography>
-                {/* Add workout form inputs and button */}
-                {/* Use handleAddWorkout to handle the button click */}
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Add Cheat Meal
-                </Typography>
-                {/* Add cheat meal form inputs and button */}
-                {/* Use handleAddCheatMeal to handle the button click */}
-              </CardContent>
-            </Card>
-          </Grid>
         </Grid>
       </div>
     </Container>
