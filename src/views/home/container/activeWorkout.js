@@ -18,10 +18,7 @@ import {
 
 import { workoutPlanEnrollRequest } from "../actions";
 import { getIsLoggedIn } from "../selectors";
-import {
-  AppWidgetSummary,
-  SelectWorkoutPlanCard,
-} from "../../../components/dashboard";
+import { WorkoutDayCard } from "../../../components/dashboard";
 import Iconify from "../../../components/iconify";
 import workoutImage from "../../../assets/images/background/workout-img-1.jpg";
 
@@ -57,9 +54,6 @@ const ActiveWorkoutView = () => {
     "Workout 5",
     "Workout 6",
     "Workout 7",
-    "Workout 8",
-    "Workout 9",
-    "Workout 10",
   ]);
 
   const [completedWorkouts, setCompletedWorkouts] = useState([]);
@@ -76,7 +70,7 @@ const ActiveWorkoutView = () => {
           Active Workout Details
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={12} lg={6}>
+          <Grid item xs={12} md={12} lg={4}>
             <Card>
               <CardContent>
                 <Typography variant="subtitle1" gutterBottom>
@@ -94,56 +88,61 @@ const ActiveWorkoutView = () => {
                 <Typography variant="subtitle1" gutterBottom>
                   Notes: {workout.notes}
                 </Typography>
-                <Typography variant="h6" gutterBottom>
-                  Exercises:
-                </Typography>
-                <List>
-                  {workout.exercises.map((exercise, index) => (
-                    <ListItem key={index}>
-                      <ListItemText
-                        primary={exercise.name}
-                        secondary={`Sets: ${exercise.sets}, Reps: ${exercise.reps}`}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
+                <img
+                  src={workoutImage}
+                  alt="workout"
+                  width="100%"
+                  style={{ marginTop: 30 }}
+                />
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} md={12} lg={6}>
-            <Card>
-              <CardContent>
-                <div>
-                  <Typography variant="h5" gutterBottom>
-                    Selected Workout Plan
-                  </Typography>
-                  <List>
-                    {workoutPlan.map((workout, index) => (
-                      <ListItem key={index}>
-                        <Checkbox
-                          checked={completedWorkouts.includes(index)}
-                          disabled={index > today}
-                          onChange={() => handleCompleteWorkout(index)}
-                        />
-                        <ListItemText
-                          primary={`Day ${index + 1}`}
-                          secondary={workout}
-                        />
-                        {index === today && (
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handleCompleteWorkout(index)}
-                          >
-                            Complete
-                          </Button>
-                        )}
-                      </ListItem>
-                    ))}
-                  </List>
-                </div>
-              </CardContent>
-            </Card>
+          <Grid item xs={12} md={12} lg={8}>
+            <WorkoutDayCard
+              onItemClick={(id, name) => {
+                console.log("clicked on:", name, id);
+                navigate(`/selected-day/${id}`);
+              }}
+              style={{ cursor: "pointer" }}
+              title="Pick the day and complete the workout"
+              list={[
+                {
+                  id: 1,
+                  name: "Day 1",
+                  status: "completed",
+                },
+                {
+                  id: 2,
+                  name: "Day 2",
+                  status: "completed",
+                },
+                {
+                  id: 3,
+                  name: "Day 3",
+                  status: "completed",
+                },
+                {
+                  id: 4,
+                  name: "Day 4",
+                  status: "incompleted",
+                },
+                {
+                  id: 5,
+                  name: "Day 5",
+                  status: "incompleted",
+                },
+                {
+                  id: 6,
+                  name: "Day 6",
+                  status: "incompleted",
+                },
+                {
+                  id: 7,
+                  name: "Day 7",
+                  status: "incompleted",
+                },
+              ]}
+            />
           </Grid>
         </Grid>
       </div>

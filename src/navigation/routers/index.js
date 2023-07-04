@@ -25,6 +25,9 @@ const SingleWorkout = Loadable(
 const ActiveWorkout = Loadable(
   lazy(() => import("../../views/home/container/activeWorkout"))
 );
+const SelectedDay = Loadable(
+  lazy(() => import("../../views/home/container/selectedDay"))
+);
 const Report = Loadable(
   lazy(() => import("../../views/home/container/report"))
 );
@@ -71,6 +74,10 @@ export function AuthorizedRouter() {
     {
       path: "/active-workout/:id",
       element: <ActiveWorkout />,
+    },
+    {
+      path: "/selected-day/:id",
+      element: <SelectedDay />,
     },
     {
       path: "/report",
