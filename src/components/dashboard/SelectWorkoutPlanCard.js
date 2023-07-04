@@ -35,7 +35,7 @@ export default function SelectWorkoutPlanCard({
           sx={{
             display: "grid",
             gap: 2,
-            gridTemplateColumns: "repeat(2, 1fr)",
+            gridTemplateColumns: "repeat(4, 1fr)",
           }}
         >
           {list.map((site) => (

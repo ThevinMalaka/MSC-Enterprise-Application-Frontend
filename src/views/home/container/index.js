@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Grid, Container, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
-import { testAction } from "../actions";
+import { workoutPlanEnrollRequest } from "../actions";
 import { getIsLoggedIn } from "../selectors";
 import {
   AppWidgetSummary,
@@ -19,9 +19,9 @@ const HomeView = () => {
 
   const dispatch = useDispatch();
 
-  const test = useCallback(
+  const enrollWorkoutPlan = useCallback(
     (info) => {
-      dispatch(testAction(info));
+      dispatch(workoutPlanEnrollRequest(info));
     },
     [dispatch]
   );
@@ -105,6 +105,9 @@ const HomeView = () => {
                 size="large"
                 variant="contained"
                 loading={false}
+                onClick={() => {
+                  enrollWorkoutPlan(selectedPlan);
+                }}
               >
                 Enroll Now
               </LoadingButton>

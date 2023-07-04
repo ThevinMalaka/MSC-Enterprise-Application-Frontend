@@ -31,7 +31,7 @@ function DrawerAppBar(props) {
 
   const handleLogout = () => {
     dispatch(userLogoutRequest());
-    navigate("/");
+    navigate("/login");
 
     // refresh the page
     if (typeof window !== "undefined") {
@@ -99,9 +99,19 @@ function DrawerAppBar(props) {
                 Home
               </Button>
             </NavLink>
-            <NavLink to="/products" activeClassName="active">
+            <NavLink to="/workout" activeClassName="active">
               <Button style={{ marginRight: 30 }} sx={{ color: "#fff" }}>
-                Profile
+                Workout
+              </Button>
+            </NavLink>
+            <NavLink to="/meal" activeClassName="active">
+              <Button style={{ marginRight: 30 }} sx={{ color: "#fff" }}>
+                Meal
+              </Button>
+            </NavLink>
+            <NavLink to="/prediction" activeClassName="active">
+              <Button style={{ marginRight: 30 }} sx={{ color: "#fff" }}>
+                Prediction
               </Button>
             </NavLink>
             <NavLink to="/report" activeClassName="active">

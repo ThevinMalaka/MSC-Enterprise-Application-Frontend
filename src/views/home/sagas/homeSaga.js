@@ -4,7 +4,7 @@ import httpStatus from "http-status";
 import * as homeAction from "../actions";
 import { home } from "../../../api/endpoints";
 
-export function* testFunction(payload) {
+export function* workoutPlanEnrollFunction(payload) {
   console.log("SAGA", payload);
   try {
     const { info } = payload;

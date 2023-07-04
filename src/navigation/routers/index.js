@@ -16,6 +16,15 @@ const Signup = Loadable(
   lazy(() => import("../../views/login/container/signup"))
 );
 const Home = Loadable(lazy(() => import("../../views/home/container")));
+const Workout = Loadable(
+  lazy(() => import("../../views/home/container/workout"))
+);
+const SingleWorkout = Loadable(
+  lazy(() => import("../../views/home/container/singleWorkout"))
+);
+const ActiveWorkout = Loadable(
+  lazy(() => import("../../views/home/container/activeWorkout"))
+);
 const Report = Loadable(
   lazy(() => import("../../views/home/container/report"))
 );
@@ -24,6 +33,10 @@ export function UnauthorizedRouter() {
   return useRoutes([
     {
       path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/login",
       element: <Login />,
     },
     {
@@ -46,6 +59,18 @@ export function AuthorizedRouter() {
     {
       path: "/home",
       element: <Home />,
+    },
+    {
+      path: "/workout",
+      element: <Workout />,
+    },
+    {
+      path: "/workout/:id",
+      element: <SingleWorkout />,
+    },
+    {
+      path: "/active-workout/:id",
+      element: <ActiveWorkout />,
     },
     {
       path: "/report",
