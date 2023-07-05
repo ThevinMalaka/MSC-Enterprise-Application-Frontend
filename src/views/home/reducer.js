@@ -3,14 +3,20 @@ import * as types from "./actionTypes";
 
 const initialState = {
   isLoggedIn: false,
+  workoutPlanList: [],
 };
 
 export const homeReducers = createReducer(initialState, {
-  [types.TEST_ACTION](state, action) {
-    console.log("reducersss", action);
+  [types.GET_WORKOUT_PLAN_LIST_SUCCESS](state, action) {
     return {
       ...state,
-      isLoggedIn: action.info,
+      workoutPlanList: action.info,
+    };
+  },
+  [types.GET_WORKOUT_PLAN_DETAILS_SUCCESS](state, action) {
+    return {
+      ...state,
+      workoutPlanDetails: action.info,
     };
   },
 });

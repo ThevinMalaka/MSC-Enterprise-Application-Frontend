@@ -17,12 +17,7 @@ import {
 } from "@mui/material";
 
 import { workoutPlanEnrollRequest } from "../actions";
-import { getIsLoggedIn } from "../selectors";
-import {
-  AppWidgetSummary,
-  SelectWorkoutPlanCard,
-} from "../../../components/dashboard";
-import Iconify from "../../../components/iconify";
+import { getLoggedUserData } from "../selectors";
 import workoutImage from "../../../assets/images/background/workout-img-1.jpg";
 
 const SingleWorkoutView = () => {
@@ -31,10 +26,8 @@ const SingleWorkoutView = () => {
   console.log("workoutId", id);
 
   const navigate = useNavigate();
-  const status = useSelector((state) => getIsLoggedIn(state));
-  const [selectedPlan, setSelectedPlan] = useState();
-
   const dispatch = useDispatch();
+  const userData = useSelector((state) => getLoggedUserData(state));
 
   const enrollWorkoutPlan = useCallback(
     (info) => {
@@ -110,7 +103,12 @@ const SingleWorkoutView = () => {
                       size="large"
                       variant="contained"
                       color="primary"
-                      onClick={() => {}}
+                      onClick={() => {
+                        enrollWorkoutPlan({
+                          workoutPlanId: id,
+                          userId: userData.id,
+                        });
+                      }}
                     >
                       Enroll Now
                     </LoadingButton>

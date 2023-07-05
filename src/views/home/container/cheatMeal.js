@@ -116,7 +116,12 @@ const CheatMealPage = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  style={{ marginTop: 10, width: 150 }}
+                  style={{
+                    width: 150,
+                    height: 40,
+                    marginTop: 7,
+                    marginLeft: 10,
+                  }}
                   onClick={handleAddCheatMeal}
                 >
                   Add

@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardContent,
 } from "@mui/material";
+import Iconify from "./../iconify";
 
 // ----------------------------------------------------------------------
 
@@ -50,12 +51,18 @@ export default function SelectWorkoutPlanCard({
               }}
               onClick={() => onItemClick(site.id, site.name)}
             >
-              <Box sx={{ mb: 0.5 }}>{site.icon}</Box>
+              <Box sx={{ mb: 0.5 }}>
+                <Iconify
+                  icon={"arcticons:home-workouts"}
+                  color="#54D62C"
+                  width={50}
+                />
+              </Box>
 
               {/* <Typography variant="h6">{site.value}</Typography> */}
 
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {site.name}
+                {site.name} - {site.difficulty}
               </Typography>
             </Paper>
           ))}

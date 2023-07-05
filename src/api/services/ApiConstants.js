@@ -4,4 +4,5 @@ export default {
   HOME: "/WeatherForecast",
   USER_REGISTER: "api/User/create",
   USER_LOGIN: "/api/User/login",
+  WORKOUT_PLAN: "/api/WorkoutPlan",
 };

@@ -7,8 +7,17 @@
 import { takeLatest } from "redux-saga/effects";
 
 import * as types from "../actionTypes";
-import { workoutPlanEnrollFunction } from "./homeSaga";
+import {
+  workoutPlanEnrollFunction,
+  getWorkoutPlanListFunction,
+  getWorkoutPlanDetailsFunction,
+} from "./homeSaga";
 
 export const homeSaga = [
   takeLatest(types.WORKOUT_PLAN_ENROLL_REQUEST, workoutPlanEnrollFunction),
+  takeLatest(types.GET_WORKOUT_PLAN_LIST_REQUEST, getWorkoutPlanListFunction),
+  takeLatest(
+    types.GET_WORKOUT_PLAN_DETAILS_REQUEST,
+    getWorkoutPlanDetailsFunction
+  ),
 ];

@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 
 import { workoutPlanEnrollRequest } from "../actions";
-import { getIsLoggedIn } from "../selectors";
+import { getWorkoutPlanDetails } from "../selectors";
 import { WorkoutDayCard } from "../../../components/dashboard";
 import Iconify from "../../../components/iconify";
 import workoutImage from "../../../assets/images/background/workout-img-1.jpg";
@@ -29,6 +29,10 @@ const ActiveWorkoutView = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const workoutPlanDetails = useSelector((state) =>
+    getWorkoutPlanDetails(state)
+  );
 
   // sample data for workout
   const [workout, setWorkout] = useState({
