@@ -20,6 +20,7 @@ import { submitCompletedWorkoutRequest } from "../actions";
 import {
   userEnrolledWorkoutPlanData,
   completedWorkoutStatus,
+  getWorkoutPlanDetails,
 } from "../selectors";
 
 const ActiveWorkoutView = () => {
@@ -38,6 +39,10 @@ const ActiveWorkoutView = () => {
   const enrolledWorkoutData = useSelector((state) =>
     userEnrolledWorkoutPlanData(state)
   );
+  const workoutPlanDetails = useSelector((state) =>
+    getWorkoutPlanDetails(state)
+  );
+
   const submitStatus = useSelector((state) => completedWorkoutStatus(state));
 
   useEffect(() => {
@@ -52,22 +57,15 @@ const ActiveWorkoutView = () => {
       enrolledWorkoutData[0]?.id) ||
     1;
 
-  const [selectedWorkout, setSelectedWorkout] = useState(1);
+  const [selectedWorkout, setSelectedWorkout] = useState();
+  const [workoutPlan, setWorkoutPlan] = useState([]);
   const [startedWorkoutList, setStartedWorkoutList] = useState([]);
   const [completedWorkoutStartAndEndTime, setCompletedWorkoutStartAndEndTime] =
     useState([]);
 
-  const workoutPlan = [
-    { id: 1, name: "Exercise 1", sets: 3, reps: 10 },
-    { id: 2, name: "Exercise 2", sets: 3, reps: 10 },
-    { id: 3, name: "Exercise 3", sets: 3, reps: 10 },
-    { id: 4, name: "Exercise 4", sets: 3, reps: 10 },
-    { id: 5, name: "Exercise 5", sets: 3, reps: 10 },
-    { id: 6, name: "Exercise 6", sets: 3, reps: 10 },
-  ];
-
   useEffect(() => {
-    setSelectedWorkout(workoutPlan[0]);
+    setWorkoutPlan(workoutPlanDetails?.workoutPlanItems);
+    setSelectedWorkout(workoutPlanDetails?.workoutPlanItems[0]);
   }, []);
 
   const handleNext = () => {
@@ -85,7 +83,7 @@ const ActiveWorkoutView = () => {
   };
 
   const checkIfWorkoutStarted = (workout) => {
-    return startedWorkoutList.includes(workout.id);
+    return startedWorkoutList.includes(workout?.id);
   };
 
   const handleStartTime = (workout) => {
@@ -153,30 +151,32 @@ const ActiveWorkoutView = () => {
                 Workout Plan
               </Typography>
               <List>
-                {workoutPlan.map((workout, index) => (
-                  <ListItem
-                    key={index}
-                    button
-                    style={{
-                      backgroundColor:
-                        selectedWorkout?.id == workout.id
-                          ? "#cfedff"
-                          : "#efefef",
-                      marginBottom: 5,
-                      borderRadius: 5,
-                    }}
-                    // onClick={() => {
-                    //   // setSelectedWorkout(workout);
-                    // }}
-                  >
-                    <ListItemText>
-                      <Typography variant="body2" gutterBottom>
-                        {workout.name} {returnStartTime(workout)}
-                        {returnEndTime(workout)}
-                      </Typography>
-                    </ListItemText>
-                  </ListItem>
-                ))}
+                {workoutPlan &&
+                  workoutPlan.length > 0 &&
+                  workoutPlan.map((workout, index) => (
+                    <ListItem
+                      key={index}
+                      button
+                      style={{
+                        backgroundColor:
+                          selectedWorkout?.id == workout.id
+                            ? "#cfedff"
+                            : "#efefef",
+                        marginBottom: 5,
+                        borderRadius: 5,
+                      }}
+                      // onClick={() => {
+                      //   // setSelectedWorkout(workout);
+                      // }}
+                    >
+                      <ListItemText>
+                        <Typography variant="body2" gutterBottom>
+                          {workout?.workout.name} {returnStartTime(workout)}
+                          {returnEndTime(workout)}
+                        </Typography>
+                      </ListItemText>
+                    </ListItem>
+                  ))}
               </List>
             </CardContent>
           </Card>
@@ -187,7 +187,7 @@ const ActiveWorkoutView = () => {
               <Grid container spacing={2}>
                 <Grid item xs={12} md={12} lg={6}>
                   <Typography variant="h6" gutterBottom>
-                    {selectedWorkout?.name}
+                    {selectedWorkout?.workout?.name}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
                     Sets: {selectedWorkout?.sets}
@@ -196,17 +196,16 @@ const ActiveWorkoutView = () => {
                     Reps: {selectedWorkout?.reps}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    Rest: 30 seconds
+                    Rest: {selectedWorkout?.rest} sec
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    Weight: 10kg
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    Notes: This is a note
+                    Notes: {selectedWorkout?.workout?.description}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} md={12} lg={6} mt={5}>
-                  {workoutPlan.length === startedWorkoutList.length ? (
+                  {workoutPlan &&
+                  workoutPlan.length > 0 &&
+                  workoutPlan.length === startedWorkoutList.length ? (
                     <LoadingButton
                       variant="contained"
                       color="error"

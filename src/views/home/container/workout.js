@@ -67,7 +67,9 @@ const WorkoutView = () => {
   }, []);
 
   const checkUserAlreadyEnrolled = (id) => {
-    const isEnrolled = enrolledWorkoutPlan?.find((item) => item.id == id);
+    const isEnrolled = enrolledWorkoutPlan?.find(
+      (item) => item.workoutPlanId == id
+    );
     return isEnrolled;
   };
 
