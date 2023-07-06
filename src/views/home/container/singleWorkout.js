@@ -20,7 +20,12 @@ import {
   workoutPlanEnrollRequest,
   getWorkoutPlanDetailsRequest,
 } from "../actions";
-import { getLoggedUserData, getWorkoutPlanDetails } from "../selectors";
+import {
+  getLoggedUserData,
+  getWorkoutPlanDetails,
+  getWorkoutPlanEnroll,
+  userEnrolledWorkoutPlanData,
+} from "../selectors";
 import workoutImage from "../../../assets/images/background/workout-img-1.jpg";
 
 const SingleWorkoutView = () => {
@@ -50,9 +55,25 @@ const SingleWorkoutView = () => {
     getWorkoutPlanDetails(state)
   );
 
+  const workoutPlanEnroll = useSelector((state) => getWorkoutPlanEnroll(state));
+  const enrolledWorkoutPlan = useSelector((state) =>
+    userEnrolledWorkoutPlanData(state)
+  );
+
   useEffect(() => {
     getWorkoutDetails(id);
   }, [id]);
+
+  useEffect(() => {
+    if (workoutPlanEnroll) {
+      navigate("/workout");
+    }
+  }, [workoutPlanEnroll]);
+
+  const checkUserAlreadyEnrolled = (id) => {
+    const isEnrolled = enrolledWorkoutPlan?.find((item) => item.id == id);
+    return isEnrolled;
+  };
 
   return (
     <Container>
@@ -72,9 +93,6 @@ const SingleWorkoutView = () => {
                 </Typography>
                 <Typography variant="subtitle1" gutterBottom>
                   Duration: {workoutPlanDetails?.duration}
-                </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                  MET: {workoutPlanDetails?.met}
                 </Typography>
                 <Typography variant="h6" gutterBottom>
                   Exercises:
@@ -99,37 +117,49 @@ const SingleWorkoutView = () => {
             <Card>
               <CardContent>
                 <img src={workoutImage} alt="workout" width="100%" />
-                <Grid container spacing={2}>
-                  <Grid item xs={12} md={12} lg={12} mt={3}>
-                    <LoadingButton
-                      fullWidth
-                      size="large"
-                      variant="contained"
-                      color="primary"
-                      onClick={() => {
-                        enrollWorkoutPlan({
-                          workoutPlanId: id,
-                          userId: userData.id,
-                        });
-                      }}
-                    >
-                      Enroll Now
-                    </LoadingButton>
+
+                {checkUserAlreadyEnrolled(id) && (
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} md={12} lg={12} mt={3}>
+                      <LoadingButton
+                        fullWidth
+                        size="large"
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          enrollWorkoutPlan({
+                            workoutPlanId: id,
+                            userId: userData.id,
+                          });
+                        }}
+                      >
+                        Enroll Now
+                      </LoadingButton>
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12}>
+                      <LoadingButton
+                        fullWidth
+                        size="large"
+                        variant="outlined"
+                        color="error"
+                        onClick={() => {
+                          navigate("/workout");
+                        }}
+                      >
+                        Go back
+                      </LoadingButton>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12} md={12} lg={12}>
-                    <LoadingButton
-                      fullWidth
-                      size="large"
-                      variant="outlined"
-                      color="error"
-                      onClick={() => {
-                        navigate("/workout");
-                      }}
-                    >
-                      Go back
-                    </LoadingButton>
+                )}
+                {!checkUserAlreadyEnrolled(id) && (
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} md={12} lg={12} mt={3}>
+                      <Typography variant="h6" gutterBottom>
+                        You have already enrolled another workout plan.
+                      </Typography>
+                    </Grid>
                   </Grid>
-                </Grid>
+                )}
               </CardContent>
             </Card>
           </Grid>

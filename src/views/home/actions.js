@@ -115,3 +115,26 @@ export function submitCompletedWorkoutFailed(info) {
 }
 
 // ---------------------------------------------
+
+export function getUserEnrolledWorkoutPlanRequest(info) {
+  return {
+    type: types.GET_USER_ENROLLED_WORKOUT_PLAN_REQUEST,
+    info,
+  };
+}
+
+export function getUserEnrolledWorkoutPlanSuccess(info) {
+  return {
+    type: types.GET_USER_ENROLLED_WORKOUT_PLAN_SUCCESS,
+    info,
+  };
+}
+
+export function getUserEnrolledWorkoutPlanFailed(info) {
+  return {
+    type: types.GET_USER_ENROLLED_WORKOUT_PLAN_FAILED,
+    info,
+  };
+}
+
+// ---------------------------------------------

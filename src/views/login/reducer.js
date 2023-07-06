@@ -1,3 +1,4 @@
+import jwt from "jwt-decode";
 import createReducer from "../../utils/createReducer";
 import * as types from "./actionTypes";
 
@@ -42,6 +43,17 @@ export const loginReducers = createReducer(initialState, {
       isLoggedIn: false,
       loggedUserData: {},
       token: "",
+    };
+  },
+  [types.UPDATE_TOKEN_TO_REDUCER](state, action) {
+    const token = localStorage.getItem("token");
+    // decode token
+    const decoded = jwt(token);
+    console.log("decoded token", decoded);
+    return {
+      ...state,
+      token: token,
+      loggedUserData: { ...state.loggedUserData, ...decoded },
     };
   },
 });

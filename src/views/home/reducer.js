@@ -4,6 +4,7 @@ import * as types from "./actionTypes";
 const initialState = {
   isLoggedIn: false,
   workoutPlanList: [],
+  workoutPlanEnroll: false,
 };
 
 export const homeReducers = createReducer(initialState, {
@@ -17,6 +18,24 @@ export const homeReducers = createReducer(initialState, {
     return {
       ...state,
       workoutPlanDetails: action.info,
+    };
+  },
+  [types.GET_WORKOUT_PLAN_LIST_REQUEST](state, action) {
+    return {
+      ...state,
+      workoutPlanEnroll: false, // reset
+    };
+  },
+  [types.WORKOUT_PLAN_ENROLL_SUCCESS](state, action) {
+    return {
+      ...state,
+      workoutPlanEnroll: true,
+    };
+  },
+  [types.GET_USER_ENROLLED_WORKOUT_PLAN_SUCCESS](state, action) {
+    return {
+      ...state,
+      userEnrolledWorkoutPlan: action.info,
     };
   },
 });

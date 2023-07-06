@@ -64,6 +64,13 @@ export function userLoginFailed(info) {
   };
 }
 
+export function updateTokenToReducer(info) {
+  return {
+    type: types.UPDATE_TOKEN_TO_REDUCER,
+    info,
+  };
+}
+
 export function userLogoutRequest(info) {
   return {
     type: types.USER_LOGOUT_REQUEST,

@@ -5,5 +5,7 @@ export default {
   USER_REGISTER: "api/User/create",
   USER_LOGIN: "/api/User/login",
   WORKOUT_PLAN: "/api/WorkoutPlan",
+  WORKOUT_PLAN_ENROLL: "api/UserWorkoutEnrollment/single",
   WORKOUT: "/api/Workout",
+  USER_ENROLLED_WORKOUT_PLAN: "/api/UserWorkoutEnrollment/user",
 };

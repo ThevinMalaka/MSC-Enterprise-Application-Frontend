@@ -1,19 +1,9 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  Grid,
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  List,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { Grid, Container, Typography } from "@mui/material";
 
-import { workoutPlanEnrollRequest } from "../actions";
+import { updateTokenToReducer } from "../../login/actions";
 import { getIsLoggedIn } from "../selectors";
 import {
   AppWidgetSummary,
@@ -28,12 +18,16 @@ const HomeView = () => {
 
   const dispatch = useDispatch();
 
-  const enrollWorkoutPlan = useCallback(
+  const updateToken = useCallback(
     (info) => {
-      dispatch(workoutPlanEnrollRequest(info));
+      dispatch(updateTokenToReducer(info));
     },
     [dispatch]
   );
+
+  useEffect(() => {
+    updateToken();
+  }, []);
 
   const mealPlan = [
     {

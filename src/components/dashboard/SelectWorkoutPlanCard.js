@@ -25,6 +25,7 @@ export default function SelectWorkoutPlanCard({
   list,
   onItemClick,
   selectedPlan,
+  checkUserAlreadyEnrolled,
   ...other
 }) {
   return (
@@ -47,7 +48,9 @@ export default function SelectWorkoutPlanCard({
                 py: 2.5,
                 textAlign: "center",
                 cursor: "pointer",
-                backgroundColor: site.id === selectedPlan ? "#e8e8e8" : "white",
+                backgroundColor: checkUserAlreadyEnrolled(site?.id)
+                  ? "#e8e8e8"
+                  : "white",
               }}
               onClick={() => onItemClick(site.id, site.name)}
             >
