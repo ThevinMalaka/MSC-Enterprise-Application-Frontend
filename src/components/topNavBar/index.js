@@ -104,11 +104,11 @@ function DrawerAppBar(props) {
                 Workout
               </Button>
             </NavLink>
-            <NavLink to="/meal" activeClassName="active">
+            {/* <NavLink to="/meal" activeClassName="active">
               <Button style={{ marginRight: 30 }} sx={{ color: "#fff" }}>
                 Meal
               </Button>
-            </NavLink>
+            </NavLink> */}
             <NavLink to="/cheat-meal" activeClassName="active">
               <Button style={{ marginRight: 30 }} sx={{ color: "#fff" }}>
                 Cheat Meal

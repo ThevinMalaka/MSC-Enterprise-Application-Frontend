@@ -16,8 +16,11 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { workoutPlanEnrollRequest } from "../actions";
-import { getLoggedUserData } from "../selectors";
+import {
+  workoutPlanEnrollRequest,
+  getWorkoutPlanDetailsRequest,
+} from "../actions";
+import { getLoggedUserData, getWorkoutPlanDetails } from "../selectors";
 import workoutImage from "../../../assets/images/background/workout-img-1.jpg";
 
 const SingleWorkoutView = () => {
@@ -36,20 +39,20 @@ const SingleWorkoutView = () => {
     [dispatch]
   );
 
-  // sample data for workout
-  const [workout, setWorkout] = useState({
-    id: 1,
-    name: "Workout 1",
-    date: "2021-10-01",
-    duration: 60,
-    caloriesBurned: 500,
-    notes: "This is a note",
-    exercises: [
-      { id: 1, name: "Exercise 1", sets: 3, reps: 10 },
-      { id: 2, name: "Exercise 2", sets: 3, reps: 10 },
-      { id: 3, name: "Exercise 3", sets: 3, reps: 10 },
-    ],
-  });
+  const getWorkoutDetails = useCallback(
+    (info) => {
+      dispatch(getWorkoutPlanDetailsRequest(info));
+    },
+    [dispatch]
+  );
+
+  const workoutPlanDetails = useSelector((state) =>
+    getWorkoutPlanDetails(state)
+  );
+
+  useEffect(() => {
+    getWorkoutDetails(id);
+  }, [id]);
 
   return (
     <Container>
@@ -62,32 +65,32 @@ const SingleWorkoutView = () => {
             <Card>
               <CardContent>
                 <Typography variant="subtitle1" gutterBottom>
-                  Workout Name: {workout.name}
+                  Workout Name: {workoutPlanDetails?.name}
                 </Typography>
                 <Typography variant="subtitle1" gutterBottom>
-                  Date: {workout.date}
+                  Description: {workoutPlanDetails?.description}
                 </Typography>
                 <Typography variant="subtitle1" gutterBottom>
-                  Duration: {workout.duration} minutes
+                  Duration: {workoutPlanDetails?.duration}
                 </Typography>
                 <Typography variant="subtitle1" gutterBottom>
-                  Calories Burned: {workout.caloriesBurned}
-                </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                  Notes: {workout.notes}
+                  MET: {workoutPlanDetails?.met}
                 </Typography>
                 <Typography variant="h6" gutterBottom>
                   Exercises:
                 </Typography>
                 <List>
-                  {workout.exercises.map((exercise, index) => (
-                    <ListItem key={index}>
-                      <ListItemText
-                        primary={exercise.name}
-                        secondary={`Sets: ${exercise.sets}, Reps: ${exercise.reps}`}
-                      />
-                    </ListItem>
-                  ))}
+                  {workoutPlanDetails?.workoutPlanItems &&
+                    workoutPlanDetails?.workoutPlanItems.map(
+                      (exercise, index) => (
+                        <ListItem key={index}>
+                          <ListItemText
+                            primary={exercise?.workout.name}
+                            secondary={`Sets: ${exercise.sets}, Reps: ${exercise.reps}`}
+                          />
+                        </ListItem>
+                      )
+                    )}
                 </List>
               </CardContent>
             </Card>

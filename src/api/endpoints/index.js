@@ -19,6 +19,16 @@ export const getWorkoutPlans = async (info) => {
   }
 };
 
+export const getWorkoutPlanDetails = async (info) => {
+  try {
+    return Promise.resolve(
+      await apiInstance.get(`${ApiConstants.WORKOUT_PLAN}/${info}`)
+    );
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export const userRegister = async (info) => {
   try {
     return Promise.resolve(

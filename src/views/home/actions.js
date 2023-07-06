@@ -92,3 +92,26 @@ export function getWorkoutPlanDetailsFailed(info) {
 }
 
 // ---------------------------------------------
+
+export function submitCompletedWorkoutRequest(info) {
+  return {
+    type: types.SUBMIT_COMPLETED_WORKOUT_REQUEST,
+    info,
+  };
+}
+
+export function submitCompletedWorkoutSuccess(info) {
+  return {
+    type: types.SUBMIT_COMPLETED_WORKOUT_SUCCESS,
+    info,
+  };
+}
+
+export function submitCompletedWorkoutFailed(info) {
+  return {
+    type: types.SUBMIT_COMPLETED_WORKOUT_FAILED,
+    info,
+  };
+}
+
+// ---------------------------------------------

@@ -14,7 +14,6 @@ import { getIsLoggedIn } from "./views/login/selectors";
 const App = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
   const token = localStorage.getItem("token");
-  console.log("token------1111---", token);
   return (
     <>
       <ReduxToastr

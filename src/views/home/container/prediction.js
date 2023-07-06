@@ -28,48 +28,32 @@ const PredictionPage = () => {
   return (
     <Container>
       <div>
-        <Typography variant="h5" gutterBottom>
-          Fitness Prediction
-        </Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{ marginTop: 60 }}>
+          <Grid item xs={12} md={12} lg={3}></Grid>
           <Grid item xs={12} md={12} lg={6}>
             <Card>
               <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Weight
-                </Typography>
-                <TextField
-                  label="Enter your weight"
-                  variant="outlined"
-                  value={weight}
-                  onChange={handleWeightChange}
-                />
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={12} lg={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  style={{ marginBottom: 20 }}
+                >
                   Prediction Result
                 </Typography>
                 <Typography variant="subtitle1" gutterBottom>
-                  {predictionResult
-                    ? `Predicted weight after 30 days: ${predictionResult} lbs`
-                    : "No prediction yet"}
+                  Date: 2021-10-10 - Weight: 80 kg
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  Date: 2021-10-10 - Weight: 80 kg
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  Date: 2021-10-10 - Weight: 80 kg
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  Date: 2021-10-10 - Weight: 80 kg
                 </Typography>
               </CardContent>
             </Card>
-          </Grid>
-          <Grid item xs={12} md={12} lg={6}>
-            <LoadingButton
-              variant="contained"
-              color="primary"
-              onClick={handlePredict}
-              fullWidth
-            >
-              Predict
-            </LoadingButton>
           </Grid>
         </Grid>
       </div>

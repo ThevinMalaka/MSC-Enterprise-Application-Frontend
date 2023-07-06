@@ -102,7 +102,7 @@ const HomeView = () => {
             />
           </Grid> */}
 
-          <Grid item xs={12} md={12} lg={12}>
+          {/* <Grid item xs={12} md={12} lg={12}>
             <div>
               <Typography variant="h5" gutterBottom>
                 Selected Meal Plan
@@ -131,7 +131,7 @@ const HomeView = () => {
                 ))}
               </Grid>
             </div>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </>
