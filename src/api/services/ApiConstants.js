@@ -8,4 +8,5 @@ export default {
   WORKOUT_PLAN_ENROLL: "api/UserWorkoutEnrollment/single",
   WORKOUT: "/api/Workout",
   USER_ENROLLED_WORKOUT_PLAN: "/api/UserWorkoutEnrollment/user",
+  COMPLETE_WORKOUT: "api/UserWorkoutEnrollment/complete",
 };

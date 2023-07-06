@@ -17,7 +17,10 @@ import {
 } from "@mui/material";
 
 import { getWorkoutPlanDetailsRequest } from "../actions";
-import { getWorkoutPlanDetails } from "../selectors";
+import {
+  getWorkoutPlanDetails,
+  userEnrolledWorkoutPlanData,
+} from "../selectors";
 import { WorkoutDayCard } from "../../../components/dashboard";
 import Iconify from "../../../components/iconify";
 import workoutImage from "../../../assets/images/background/workout-img-1.jpg";
@@ -34,6 +37,10 @@ const ActiveWorkoutView = () => {
     getWorkoutPlanDetails(state)
   );
 
+  const enrolledWorkoutData = useSelector((state) =>
+    userEnrolledWorkoutPlanData(state)
+  );
+
   const getWorkoutDetails = useCallback(
     (info) => {
       dispatch(getWorkoutPlanDetailsRequest(info));
@@ -45,22 +52,24 @@ const ActiveWorkoutView = () => {
     getWorkoutDetails(id);
   }, [id]);
 
-  // sample data for workout plan
-  const [workoutPlan, setWorkoutPlan] = useState([
-    "Workout 1",
-    "Workout 2",
-    "Workout 3",
-    "Workout 4",
-    "Workout 5",
-    "Workout 6",
-    "Workout 7",
-  ]);
-
   const [completedWorkouts, setCompletedWorkouts] = useState([]);
-  const today = new Date().getDay(); // Get current day (0-6, where Sunday is 0)
 
   const handleCompleteWorkout = (day) => {
     setCompletedWorkouts([...completedWorkouts, day]);
+  };
+
+  const getDaysArray = () => {
+    const completedDays = enrolledWorkoutData[0]?.completedDays || 0;
+    const daysArray = [];
+    for (let i = 1; i <= workoutPlanDetails?.duration; i++) {
+      daysArray.push({
+        id: i,
+        name: `Day ${i}`,
+        status: i <= completedDays ? "completed" : "pending",
+      });
+    }
+
+    return daysArray;
   };
 
   return (
@@ -117,43 +126,7 @@ const ActiveWorkoutView = () => {
               }}
               style={{ cursor: "pointer" }}
               title="Pick the day and complete the workout"
-              list={[
-                {
-                  id: 1,
-                  name: "Day 1",
-                  status: "completed",
-                },
-                {
-                  id: 2,
-                  name: "Day 2",
-                  status: "completed",
-                },
-                {
-                  id: 3,
-                  name: "Day 3",
-                  status: "completed",
-                },
-                {
-                  id: 4,
-                  name: "Day 4",
-                  status: "incompleted",
-                },
-                {
-                  id: 5,
-                  name: "Day 5",
-                  status: "incompleted",
-                },
-                {
-                  id: 6,
-                  name: "Day 6",
-                  status: "incompleted",
-                },
-                {
-                  id: 7,
-                  name: "Day 7",
-                  status: "incompleted",
-                },
-              ]}
+              list={getDaysArray()}
             />
           </Grid>
         </Grid>

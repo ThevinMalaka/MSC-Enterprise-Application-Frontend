@@ -5,6 +5,7 @@ const initialState = {
   isLoggedIn: false,
   workoutPlanList: [],
   workoutPlanEnroll: false,
+  submitCompletedWorkoutStatus: false,
 };
 
 export const homeReducers = createReducer(initialState, {
@@ -24,6 +25,7 @@ export const homeReducers = createReducer(initialState, {
     return {
       ...state,
       workoutPlanEnroll: false, // reset
+      submitCompletedWorkoutStatus: false, // reset
     };
   },
   [types.WORKOUT_PLAN_ENROLL_SUCCESS](state, action) {
@@ -36,6 +38,12 @@ export const homeReducers = createReducer(initialState, {
     return {
       ...state,
       userEnrolledWorkoutPlan: action.info,
+    };
+  },
+  [types.SUBMIT_COMPLETED_WORKOUT_SUCCESS](state, action) {
+    return {
+      ...state,
+      submitCompletedWorkoutStatus: true,
     };
   },
 });

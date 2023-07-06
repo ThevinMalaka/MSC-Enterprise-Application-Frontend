@@ -70,3 +70,13 @@ export const getUserEnrolledWorkoutPlan = async (info) => {
     return Promise.reject(error);
   }
 };
+
+export const submitWorkoutPlan = async (info) => {
+  try {
+    return Promise.resolve(
+      await apiInstance.put(`${ApiConstants.COMPLETE_WORKOUT}/${info}`)
+    );
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

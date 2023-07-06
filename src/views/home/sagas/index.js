@@ -12,6 +12,7 @@ import {
   getWorkoutPlanListFunction,
   getWorkoutPlanDetailsFunction,
   getUserEnrolledWorkoutPlanFunction,
+  completeWorkoutFunction,
 } from "./homeSaga";
 
 export const homeSaga = [
@@ -25,4 +26,5 @@ export const homeSaga = [
     types.GET_USER_ENROLLED_WORKOUT_PLAN_REQUEST,
     getUserEnrolledWorkoutPlanFunction
   ),
+  takeLatest(types.SUBMIT_COMPLETED_WORKOUT_REQUEST, completeWorkoutFunction),
 ];

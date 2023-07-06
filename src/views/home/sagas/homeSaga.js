@@ -8,10 +8,10 @@ import {
   getWorkoutPlans,
   getWorkoutPlanDetails,
   getUserEnrolledWorkoutPlan,
+  submitWorkoutPlan,
 } from "../../../api/endpoints";
 
 export function* workoutPlanEnrollFunction(payload) {
-  console.log("SAGA", payload);
   try {
     const { info } = payload;
     const { data, status } = yield call(workoutPlanEnrolment, info);
@@ -94,5 +94,29 @@ export function* getUserEnrolledWorkoutPlanFunction(payload) {
     yield put(homeAction.getUserEnrolledWorkoutPlanSuccess(data));
   } catch (error) {
     yield put(homeAction.getUserEnrolledWorkoutPlanFailed());
+  }
+}
+
+export function* completeWorkoutFunction(payload) {
+  try {
+    const { info } = payload;
+    const { data, status } = yield call(submitWorkoutPlan, info);
+
+    if (status !== httpStatus.OK) {
+      throw new Error();
+    }
+    yield put(homeAction.submitCompletedWorkoutSuccess());
+    toastr.clean(); // clean the previous toastr
+    toastr.success("Success", "Workout completed successfully.");
+    setTimeout(() => {
+      toastr.clean(); //  clean the toastr after 3 seconds
+    }, 4000);
+  } catch (error) {
+    yield put(homeAction.submitCompletedWorkoutFailed());
+    toastr.clean(); // clean the previous toastr
+    toastr.error("Error", "Something went wrong! Please try again later.");
+    setTimeout(() => {
+      toastr.clean(); //  clean the toastr after 3 seconds
+    }, 4000);
   }
 }

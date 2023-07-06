@@ -16,12 +16,41 @@ import {
   ListItemText,
 } from "@mui/material";
 
+import { submitCompletedWorkoutRequest } from "../actions";
+import {
+  userEnrolledWorkoutPlanData,
+  completedWorkoutStatus,
+} from "../selectors";
+
 const ActiveWorkoutView = () => {
   // get the workout id from the url
   const { id } = useParams();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const submitWorkout = useCallback(
+    (info) => {
+      dispatch(submitCompletedWorkoutRequest(info));
+    },
+    [dispatch]
+  );
+  const enrolledWorkoutData = useSelector((state) =>
+    userEnrolledWorkoutPlanData(state)
+  );
+  const submitStatus = useSelector((state) => completedWorkoutStatus(state));
+
+  useEffect(() => {
+    if (submitStatus) {
+      navigate("/workout");
+    }
+  }, [submitStatus]);
+
+  const workoutPlanId =
+    (enrolledWorkoutData &&
+      enrolledWorkoutData.length != 0 &&
+      enrolledWorkoutData[0]?.id) ||
+    1;
 
   const [selectedWorkout, setSelectedWorkout] = useState(1);
   const [startedWorkoutList, setStartedWorkoutList] = useState([]);
@@ -185,7 +214,9 @@ const ActiveWorkoutView = () => {
                       fullWidth
                       size="large"
                       onClick={() => {
-                        navigate("/workout");
+                        submitWorkout(workoutPlanId);
+                        // navigate("/workout");
+                        // http://localhost:5166/api/UserWorkoutEnrollment/complete/1
                         handleEndTime(selectedWorkout);
                       }}
                     >

@@ -49,10 +49,14 @@ export default function WorkoutDayCard({
               sx={{
                 py: 2.5,
                 textAlign: "center",
-                cursor: "pointer",
+                cursor: site.status == "completed" ? "not-allowed" : "pointer",
                 backgroundColor: site.id === selectedPlan ? "#e8e8e8" : "white",
               }}
-              onClick={() => onItemClick(site.id, site.name)}
+              onClick={() =>
+                site.status == "completed"
+                  ? ""
+                  : onItemClick(site.id, site.name)
+              }
             >
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 {site.name}
