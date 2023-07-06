@@ -6,9 +6,6 @@ import ReduxToastr from "react-redux-toastr";
 import { UnauthorizedRouter, AuthorizedRouter } from "./navigation/routers";
 import TopNavBar from "./components/topNavBar";
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
-
-import "./i18n"; // use for import translation file
-import useWindowDimensions from "./utils/useWindowDimensions";
 import { getIsLoggedIn } from "./views/login/selectors";
 
 const App = () => {

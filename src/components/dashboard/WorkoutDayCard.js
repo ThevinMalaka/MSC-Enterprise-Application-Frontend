@@ -1,4 +1,3 @@
-// @mui
 import PropTypes from "prop-types";
 import {
   Box,
@@ -8,8 +7,6 @@ import {
   CardHeader,
   CardContent,
 } from "@mui/material";
-
-// ----------------------------------------------------------------------
 
 WorkoutDayCard.propTypes = {
   title: PropTypes.string,

@@ -1,4 +1,3 @@
-// @mui
 import PropTypes from "prop-types";
 import {
   Box,
@@ -9,8 +8,6 @@ import {
   CardContent,
 } from "@mui/material";
 import Iconify from "./../iconify";
-
-// ----------------------------------------------------------------------
 
 SelectWorkoutPlanCard.propTypes = {
   title: PropTypes.string,
@@ -61,8 +58,6 @@ export default function SelectWorkoutPlanCard({
                   width={50}
                 />
               </Box>
-
-              {/* <Typography variant="h6">{site.value}</Typography> */}
 
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 {site.name} - {site.difficulty}

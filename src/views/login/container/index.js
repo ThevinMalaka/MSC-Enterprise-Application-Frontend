@@ -16,10 +16,10 @@ import {
   Checkbox,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+
 // hooks
 import useResponsive from "../../../hooks/useResponsive";
 // components
-import Logo from "../../../components/logo";
 import Iconify from "../../../components/iconify";
 import BackgroundImage from "../../../assets/images/background/login-bg.png";
 import { userLoginRequest } from "../actions";
@@ -29,10 +29,6 @@ const StyledRoot = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     display: "flex",
     backgroundColor: "#fff",
-    // backgroundImage: `url(${BackgroundImage})`,
-    // backgroundRepeat: "no-repeat",
-    // backgroundSize: "cover",
-    // backgroundPosition: "center",
   },
 }));
 
