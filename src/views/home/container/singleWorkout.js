@@ -71,11 +71,7 @@ const SingleWorkoutView = () => {
   }, [workoutPlanEnroll]);
 
   const checkUserAlreadyEnrolled = (id) => {
-    console.log(
-      "enrolledWorkoutPlan--------",
-      enrolledWorkoutPlan?.find((item) => item.id == id)
-    );
-    if (enrolledWorkoutPlan.length == 0) return true;
+    if (enrolledWorkoutPlan && enrolledWorkoutPlan?.length == 0) return true;
     const isEnrolled = enrolledWorkoutPlan?.find((item) => item.id == id);
     return isEnrolled;
   };

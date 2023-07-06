@@ -43,8 +43,8 @@ export default function RegistrationForm() {
     name: "",
     email: "",
     password: "",
-    currentHeight: "",
-    currentWeight: "",
+    height: "",
+    weight: "",
     dateOfBirth: "",
   });
 
@@ -75,10 +75,10 @@ export default function RegistrationForm() {
     if (!values.password) {
       errors.push("Please enter your password");
     }
-    if (!values.currentHeight) {
+    if (!values.height) {
       errors.push("Please enter your height");
     }
-    if (!values.currentWeight) {
+    if (!values.weight) {
       errors.push("Please enter your weight");
     }
     if (!values.dateOfBirth) {
@@ -168,9 +168,9 @@ export default function RegistrationForm() {
               id="height"
               label="Height (cm)"
               name="height"
-              value={values.currentHeight}
+              value={values.height}
               onChange={(event) => {
-                handleChange("currentHeight", event);
+                handleChange("height", event);
               }}
             />
             <TextField
@@ -181,9 +181,9 @@ export default function RegistrationForm() {
               id="weight"
               label="Weight (kg)"
               name="weight"
-              value={values.currentWeight}
+              value={values.weight}
               onChange={(event) => {
-                handleChange("currentWeight", event);
+                handleChange("weight", event);
               }}
             />
             <Typography

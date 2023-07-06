@@ -34,23 +34,26 @@ const PredictionPage = () => {
             <Card>
               <CardContent>
                 <Typography
-                  variant="h6"
+                  variant="h4"
                   gutterBottom
                   style={{ marginBottom: 20 }}
                 >
                   Prediction Result
                 </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                  Date: 2021-10-10 - Weight: 80 kg
+                <Typography variant="subtitle2" gutterBottom>
+                  Date: 2023-07-05 - Weight: 80 kg
                 </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                  Date: 2021-10-10 - Weight: 80 kg
+                <Typography variant="subtitle2" gutterBottom>
+                  Date: 2023-07-06 - Weight: 79.5 kg
                 </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                  Date: 2021-10-10 - Weight: 80 kg
+                <Typography variant="subtitle2" gutterBottom>
+                  Date: 2023-07-07 - Weight: 79 kg
                 </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                  Date: 2021-10-10 - Weight: 80 kg
+                <Typography variant="subtitle2" gutterBottom>
+                  Date: 2023-07-08 - Weight: 78.5 kg
+                </Typography>
+                <Typography variant="subtitle2" gutterBottom>
+                  Date: 2023-07-09 - Weight: 78 kg
                 </Typography>
               </CardContent>
             </Card>
