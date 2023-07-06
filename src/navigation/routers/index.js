@@ -38,6 +38,9 @@ const Prediction = Loadable(
 const CheatMeal = Loadable(
   lazy(() => import("../../views/home/container/cheatMeal"))
 );
+const Weight = Loadable(
+  lazy(() => import("../../views/home/container/weight"))
+);
 
 export function UnauthorizedRouter() {
   return useRoutes([
@@ -101,6 +104,10 @@ export function AuthorizedRouter() {
     {
       path: "/cheat-meal",
       element: <CheatMeal />,
+    },
+    {
+      path: "/weight",
+      element: <Weight />,
     },
     {
       path: "*",
