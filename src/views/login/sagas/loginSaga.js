@@ -20,7 +20,6 @@ export function* userRegistrationFunction(payload) {
       toastr.clean(); //  clean the toastr after 3 seconds
     }, 4000);
   } catch (error) {
-    console.log("SAGA Failed");
     toastr.clean(); // clean the previous toastr
     toastr.error("Error", "Something went wrong! Please try again later.");
     yield put(loginAction.userRegistrationFailed());
@@ -45,7 +44,6 @@ export function* userLoginFunction(payload) {
       toastr.clean(); //  clean the toastr after 3 seconds
     }, 4000);
   } catch (error) {
-    console.log("SAGA Failed");
     toastr.clean(); // clean the previous toastr
     toastr.error("Error", "Something went wrong! Please try again later.");
     yield put(loginAction.userLoginFailed());

@@ -64,7 +64,6 @@ export function* getWorkoutPlanDetailsFunction(payload) {
 }
 
 export function* submitCompletedWorkoutFunction(payload) {
-  console.log("SAGA", payload);
   try {
     const { info } = payload;
     const { data, status } = yield call(workoutPlanEnrolment);

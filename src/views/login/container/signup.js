@@ -50,10 +50,7 @@ export default function RegistrationForm() {
 
   const handleChange = (type, event) => {
     event.preventDefault();
-    console.log(type, event.target.value);
     setValues({ ...values, [type]: event.target.value });
-    console.log(values);
-    // setValues({ ...values, [prop]: event.target.value });
   };
 
   const submitUser = useCallback(
@@ -96,7 +93,6 @@ export default function RegistrationForm() {
       return;
     }
     // handle form submission logic here
-    console.log(values);
     submitUser(values);
   };
 

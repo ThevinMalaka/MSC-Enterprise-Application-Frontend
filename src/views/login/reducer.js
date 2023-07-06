@@ -12,8 +12,6 @@ const initialState = {
 export const loginReducers = createReducer(initialState, {
   [types.USER_LOGIN_SUCCESS](state, action) {
     const { user, token } = action.info;
-    console.log("action-----", user);
-    console.log("action-----", token);
     // save token in local storage for future use
     localStorage.setItem("token", token);
 
@@ -49,7 +47,6 @@ export const loginReducers = createReducer(initialState, {
     const token = localStorage.getItem("token");
     // decode token
     const decoded = jwt(token);
-    console.log("decoded token", decoded);
     return {
       ...state,
       token: token,

@@ -28,7 +28,6 @@ import workoutImage from "../../../assets/images/background/workout-img-1.jpg";
 const ActiveWorkoutView = () => {
   // get the workout id from the url
   const { id } = useParams();
-  console.log("workoutId", id);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -121,7 +120,6 @@ const ActiveWorkoutView = () => {
           <Grid item xs={12} md={12} lg={8}>
             <WorkoutDayCard
               onItemClick={(id, name) => {
-                console.log("clicked on:", name, id);
                 navigate(`/selected-day/${id}`);
               }}
               style={{ cursor: "pointer" }}

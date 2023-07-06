@@ -1,18 +1,18 @@
-import createSagaMiddleware from 'redux-saga';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routinePromiseWatcherSaga } from 'redux-saga-routines';
-import { createLogger } from 'redux-logger';
-import { persistStore, persistCombineReducers } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import createSagaMiddleware from "redux-saga";
+import { createStore, applyMiddleware, compose } from "redux";
+import { routinePromiseWatcherSaga } from "redux-saga-routines";
+import { createLogger } from "redux-logger";
+import { persistStore, persistCombineReducers } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-import rootReducer from './store/rootReducer'; //
-import rootSaga from './store/rootSaga';
+import rootReducer from "./store/rootReducer"; //
+import rootSaga from "./store/rootSaga";
 
 export default function configureStore() {
   const config = {
-    key: 'root',
+    key: "root",
     storage,
-    blacklist: ['loadingReducer'],
+    blacklist: ["loadingReducer"],
     debug: true,
   };
 

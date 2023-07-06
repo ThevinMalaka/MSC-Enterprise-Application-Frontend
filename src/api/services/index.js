@@ -22,7 +22,6 @@ apiInstance.interceptors.request.use(
   async function (config) {
     const refreshToken = "test token";
     const token = localStorage.getItem("token");
-    console.log("token APII---------", token);
     config.headers = {
       ...config.headers,
       Authorization: `bearer ${token}`,

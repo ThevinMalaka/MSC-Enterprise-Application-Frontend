@@ -31,7 +31,6 @@ import workoutImage from "../../../assets/images/background/workout-img-1.jpg";
 const SingleWorkoutView = () => {
   // get the workout id from the url
   const { id } = useParams();
-  console.log("workoutId", id);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -1,16 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { LoadingButton } from "@mui/lab";
-import {
-  Typography,
-  TextField,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-  Container,
-} from "@mui/material";
+import { Typography, Grid, Container } from "@mui/material";
 
 import {
   getWorkoutPlanListRequest,
@@ -84,8 +75,6 @@ const WorkoutView = () => {
             <SelectWorkoutPlanCard
               selectedPlan={selectedPlan}
               onItemClick={(id, name) => {
-                // setSelectedPlan(id);
-                // route to single workout page
                 if (checkUserAlreadyEnrolled(id)) {
                   navigate(`/active-workout/${id}`);
                 } else {
