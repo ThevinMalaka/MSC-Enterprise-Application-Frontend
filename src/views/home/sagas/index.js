@@ -13,6 +13,8 @@ import {
   getWorkoutPlanDetailsFunction,
   getUserEnrolledWorkoutPlanFunction,
   completeWorkoutFunction,
+  addWeightFunction,
+  getWeightListFunction,
 } from "./homeSaga";
 
 export const homeSaga = [
@@ -27,4 +29,6 @@ export const homeSaga = [
     getUserEnrolledWorkoutPlanFunction
   ),
   takeLatest(types.SUBMIT_COMPLETED_WORKOUT_REQUEST, completeWorkoutFunction),
+  takeLatest(types.ADD_WEIGHT_REQUEST, addWeightFunction),
+  takeLatest(types.GET_WEIGHT_LIST_REQUEST, getWeightListFunction),
 ];

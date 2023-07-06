@@ -116,3 +116,49 @@ export function getUserEnrolledWorkoutPlanFailed(info) {
 }
 
 // ---------------------------------------------
+
+export function addWeightRequest(info) {
+  return {
+    type: types.ADD_WEIGHT_REQUEST,
+    info,
+  };
+}
+
+export function addWeightSuccess(info) {
+  return {
+    type: types.ADD_WEIGHT_SUCCESS,
+    info,
+  };
+}
+
+export function addWeightFailed(info) {
+  return {
+    type: types.ADD_WEIGHT_FAILED,
+    info,
+  };
+}
+
+// ---------------------------------------------
+
+export function getWeightListRequest(info) {
+  return {
+    type: types.GET_WEIGHT_LIST_REQUEST,
+    info,
+  };
+}
+
+export function getWeightListSuccess(info) {
+  return {
+    type: types.GET_WEIGHT_LIST_SUCCESS,
+    info,
+  };
+}
+
+export function getWeightListFailed(info) {
+  return {
+    type: types.GET_WEIGHT_LIST_FAILED,
+    info,
+  };
+}
+
+// ---------------------------------------------

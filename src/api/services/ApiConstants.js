@@ -9,4 +9,5 @@ export default {
   WORKOUT: "/api/Workout",
   USER_ENROLLED_WORKOUT_PLAN: "/api/UserWorkoutEnrollment/user",
   COMPLETE_WORKOUT: "api/UserWorkoutEnrollment/complete",
+  WEIGHT: "/api/User/Wieght",
 };

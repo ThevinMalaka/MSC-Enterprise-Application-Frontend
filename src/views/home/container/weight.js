@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Typography,
   TextField,
@@ -12,23 +13,35 @@ import {
   Container,
 } from "@mui/material";
 
+import { addWeightRequest, getWeightListRequest } from "../actions";
+import { userWeightList, getLoggedUserData } from "../selectors";
+
 const WeightPage = () => {
-  const [cheatMeal, setCheatMeal] = useState("");
-  const [mealType, setMealType] = useState("");
-  const [calories, setCalories] = useState("");
+  const dispatch = useDispatch();
+
+  const [weight, setWeight] = useState("");
   const [date, setDate] = useState("");
-  const [cheatMeals, setCheatMeals] = useState([]);
+  const [weightList, setWeightList] = useState([]);
 
-  const handleCheatMealChange = (event) => {
-    setCheatMeal(event.target.value);
-  };
+  const weightListData = useSelector((state) => userWeightList(state));
+  const userData = useSelector((state) => getLoggedUserData(state));
 
-  const handleMealTypeChange = (event) => {
-    setMealType(event.target.value);
-  };
+  const addWeight = useCallback(
+    (info) => {
+      dispatch(addWeightRequest(info));
+    },
+    [dispatch]
+  );
 
-  const handleCaloriesChange = (event) => {
-    setCalories(event.target.value);
+  const getWeightList = useCallback(
+    (info) => {
+      dispatch(getWeightListRequest(info));
+    },
+    [dispatch]
+  );
+
+  const handleWeightChange = (event) => {
+    setWeight(event.target.value);
   };
 
   const handleDateChange = (event) => {
@@ -36,25 +49,22 @@ const WeightPage = () => {
   };
 
   const handleAddCheatMeal = () => {
-    if (
-      cheatMeal.trim() !== "" &&
-      mealType !== "" &&
-      calories !== "" &&
-      date !== ""
-    ) {
-      const newCheatMeal = {
-        meal: cheatMeal,
-        type: mealType,
-        calories: calories,
-        date: date,
-      };
-      setCheatMeals([...cheatMeals, newCheatMeal]);
-      setCheatMeal("");
-      setMealType("");
-      setCalories("");
-      setDate("");
+    if (weight !== "" && date !== "") {
+      addWeight({
+        weight,
+        date,
+        userId: userData.id,
+      });
     }
   };
+
+  useEffect(() => {
+    getWeightList();
+  }, []);
+
+  useEffect(() => {
+    setWeightList(weightListData);
+  }, [weightListData]);
 
   return (
     <Container>
@@ -72,9 +82,9 @@ const WeightPage = () => {
                 <TextField
                   label="Enter Weight"
                   variant="outlined"
-                  value={cheatMeal}
+                  value={weight}
                   style={{ marginRight: 10 }}
-                  onChange={handleCheatMealChange}
+                  onChange={handleWeightChange}
                 />
                 <TextField
                   label="Date"
@@ -109,20 +119,21 @@ const WeightPage = () => {
                 <Typography variant="h6" gutterBottom>
                   Weight History
                 </Typography>
-                {cheatMeals.length === 0 ? (
+                {weightList.length === 0 ? (
                   <Typography variant="subtitle1" gutterBottom>
                     No weight recorded
                   </Typography>
                 ) : (
                   <List>
-                    {cheatMeals.map((meal, index) => (
-                      <ListItem key={index}>
-                        <ListItemText
-                          primary={meal.meal}
-                          secondary={`Type: ${meal.type}, Calories: ${meal.calories}, Date: ${meal.date}`}
-                        />
-                      </ListItem>
-                    ))}
+                    {weightList &&
+                      weightList.map((meal, index) => (
+                        <ListItem key={index}>
+                          <ListItemText
+                            primary={meal.meal}
+                            secondary={`Type: ${meal.type}, Calories: ${meal.calories}, Date: ${meal.date}`}
+                          />
+                        </ListItem>
+                      ))}
                   </List>
                 )}
               </CardContent>

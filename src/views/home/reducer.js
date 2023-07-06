@@ -6,6 +6,7 @@ const initialState = {
   workoutPlanList: [],
   workoutPlanEnroll: false,
   submitCompletedWorkoutStatus: false,
+  userWeightList: [],
 };
 
 export const homeReducers = createReducer(initialState, {
@@ -44,6 +45,12 @@ export const homeReducers = createReducer(initialState, {
     return {
       ...state,
       submitCompletedWorkoutStatus: true,
+    };
+  },
+  [types.GET_WEIGHT_LIST_SUCCESS](state, action) {
+    return {
+      ...state,
+      userWeightList: action.info,
     };
   },
 });

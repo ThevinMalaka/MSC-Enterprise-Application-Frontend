@@ -80,3 +80,21 @@ export const submitWorkoutPlan = async (info) => {
     return Promise.reject(error);
   }
 };
+
+export const addWeight = async (info) => {
+  try {
+    return Promise.resolve(await apiInstance.post(ApiConstants.WEIGHT, info));
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const getWeightList = async (info) => {
+  try {
+    return Promise.resolve(
+      await apiInstance.get(`${ApiConstants.WEIGHT}/${info}`)
+    );
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

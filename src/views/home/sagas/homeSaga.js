@@ -9,6 +9,8 @@ import {
   getWorkoutPlanDetails,
   getUserEnrolledWorkoutPlan,
   submitWorkoutPlan,
+  addWeight,
+  getWeightList,
 } from "../../../api/endpoints";
 
 export function* workoutPlanEnrollFunction(payload) {
@@ -117,5 +119,43 @@ export function* completeWorkoutFunction(payload) {
     setTimeout(() => {
       toastr.clean(); //  clean the toastr after 3 seconds
     }, 4000);
+  }
+}
+
+export function* addWeightFunction(payload) {
+  try {
+    const { info } = payload;
+    const { data, status } = yield call(addWeight, info);
+
+    if (status !== httpStatus.OK) {
+      throw new Error();
+    }
+    yield put(homeAction.addWeightSuccess());
+    toastr.clean(); // clean the previous toastr
+    toastr.success("Success", "Weight added successfully.");
+    setTimeout(() => {
+      toastr.clean(); //  clean the toastr after 3 seconds
+    }, 4000);
+  } catch (error) {
+    yield put(homeAction.addWeightFailed());
+    toastr.clean(); // clean the previous toastr
+    toastr.error("Error", "Something went wrong! Please try again later.");
+    setTimeout(() => {
+      toastr.clean(); //  clean the toastr after 3 seconds
+    }, 4000);
+  }
+}
+
+export function* getWeightListFunction(payload) {
+  try {
+    const { info } = payload;
+    const { data, status } = yield call(getWeightList, info);
+
+    if (status !== httpStatus.OK) {
+      throw new Error();
+    }
+    yield put(homeAction.getWeightListSuccess(data));
+  } catch (error) {
+    yield put(homeAction.getWeightListFailed());
   }
 }

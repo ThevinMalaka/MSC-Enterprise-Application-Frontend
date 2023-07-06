@@ -1,12 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { LoadingButton } from "@mui/lab";
 import { useParams } from "react-router-dom";
 import {
   Typography,
-  Checkbox,
-  Button,
   Grid,
   Card,
   CardContent,
@@ -22,7 +19,6 @@ import {
   userEnrolledWorkoutPlanData,
 } from "../selectors";
 import { WorkoutDayCard } from "../../../components/dashboard";
-import Iconify from "../../../components/iconify";
 import workoutImage from "../../../assets/images/background/workout-img-1.jpg";
 
 const ActiveWorkoutView = () => {

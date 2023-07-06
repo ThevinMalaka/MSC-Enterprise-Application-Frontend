@@ -10,3 +10,4 @@ export const userEnrolledWorkoutPlanData = (state) =>
   state.homeReducers.userEnrolledWorkoutPlan;
 export const completedWorkoutStatus = (state) =>
   state.homeReducers.submitCompletedWorkoutStatus;
+export const userWeightList = (state) => state.homeReducers.userWeightList;
