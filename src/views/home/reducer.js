@@ -7,6 +7,32 @@ const initialState = {
   workoutPlanEnroll: false,
   submitCompletedWorkoutStatus: false,
   userWeightList: [],
+  userPredictionData: [
+    {
+      date: "2023-07-05",
+      weight: 80,
+    },
+    {
+      date: "2023-07-06",
+      weight: 79.5,
+    },
+    {
+      date: "2023-07-07",
+      weight: 79,
+    },
+    {
+      date: "2023-07-08",
+      weight: 78.5,
+    },
+    {
+      date: "2023-07-09",
+      weight: 78,
+    },
+    {
+      date: "2023-07-10",
+      weight: 77.5,
+    },
+  ],
 };
 
 export const homeReducers = createReducer(initialState, {

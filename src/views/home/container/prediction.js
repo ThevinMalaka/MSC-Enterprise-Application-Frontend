@@ -1,29 +1,11 @@
-import React, { useState } from "react";
-import {
-  Typography,
-  TextField,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-  Container,
-} from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import React, { useState, useCallback } from "react";
+import { Typography, Grid, Card, CardContent, Container } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+
+import { userPredictionData } from "../selectors";
 
 const PredictionPage = () => {
-  const [weight, setWeight] = useState("");
-  const [predictionResult, setPredictionResult] = useState(null);
-
-  const handleWeightChange = (event) => {
-    setWeight(event.target.value);
-  };
-
-  const handlePredict = () => {
-    // set dummy setPredictionResult
-    setPredictionResult(200);
-    // Perform fitness prediction logic here
-    // You can set the result using setPredictionResult
-  };
+  const predictionData = useSelector((state) => userPredictionData(state));
 
   return (
     <Container>
@@ -40,21 +22,15 @@ const PredictionPage = () => {
                 >
                   Prediction Result
                 </Typography>
-                <Typography variant="subtitle2" gutterBottom>
-                  Date: 2023-07-05 - Weight: 80 kg
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom>
-                  Date: 2023-07-06 - Weight: 79.5 kg
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom>
-                  Date: 2023-07-07 - Weight: 79 kg
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom>
-                  Date: 2023-07-08 - Weight: 78.5 kg
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom>
-                  Date: 2023-07-09 - Weight: 78 kg
-                </Typography>
+                {predictionData &&
+                  predictionData.length > 0 &&
+                  predictionData.map((item) => {
+                    return (
+                      <Typography variant="subtitle2" gutterBottom>
+                        Date: {item.date} - Weight: {item.weight} kg
+                      </Typography>
+                    );
+                  })}
               </CardContent>
             </Card>
           </Grid>
