@@ -9,7 +9,7 @@ export default {
   WORKOUT: "/api/Workout",
   USER_ENROLLED_WORKOUT_PLAN: "/api/UserWorkoutEnrollment/user",
   COMPLETE_WORKOUT: "api/UserWorkoutEnrollment/complete",
-  WEIGHT: "/api/User/Wieght",
+  WEIGHT: "/api/UserWeight",
   CHEAT_MEAL: "/api/CheatMeal",
   REPORT: "/api/User/Report",
 };
