@@ -11,5 +11,5 @@ export default {
   COMPLETE_WORKOUT: "api/UserWorkoutEnrollment/complete",
   WEIGHT: "/api/UserWeight",
   CHEAT_MEAL: "/api/CheatMeal",
-  REPORT: "/api/User/Report",
+  REPORT: "/api/Report/User",
 };
