@@ -162,3 +162,72 @@ export function getWeightListFailed(info) {
 }
 
 // ---------------------------------------------
+
+export function addCheatMealRequest(info) {
+  return {
+    type: types.ADD_CHEAT_MEAL_REQUEST,
+    info,
+  };
+}
+
+export function addCheatMealSuccess(info) {
+  return {
+    type: types.ADD_CHEAT_MEAL_SUCCESS,
+    info,
+  };
+}
+
+export function addCheatMealFailed(info) {
+  return {
+    type: types.ADD_CHEAT_MEAL_FAILED,
+    info,
+  };
+}
+
+// ---------------------------------------------
+
+export function getCheatMealListRequest(info) {
+  return {
+    type: types.GET_CHEAT_MEAL_LIST_REQUEST,
+    info,
+  };
+}
+
+export function getCheatMealListSuccess(info) {
+  return {
+    type: types.GET_CHEAT_MEAL_LIST_SUCCESS,
+    info,
+  };
+}
+
+export function getCheatMealListFailed(info) {
+  return {
+    type: types.GET_CHEAT_MEAL_LIST_FAILED,
+    info,
+  };
+}
+
+// ---------------------------------------------
+
+export function getReportDataRequest(info) {
+  return {
+    type: types.GET_REPORT_DATA_REQUEST,
+    info,
+  };
+}
+
+export function getReportDataSuccess(info) {
+  return {
+    type: types.GET_REPORT_DATA_SUCCESS,
+    info,
+  };
+}
+
+export function getReportDataFailed(info) {
+  return {
+    type: types.GET_REPORT_DATA_FAILED,
+    info,
+  };
+}
+
+// ---------------------------------------------

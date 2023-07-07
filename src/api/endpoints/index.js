@@ -98,3 +98,33 @@ export const getWeightList = async (info) => {
     return Promise.reject(error);
   }
 };
+
+export const addCheatMeal = async (info) => {
+  try {
+    return Promise.resolve(
+      await apiInstance.post(ApiConstants.CHEAT_MEAL, info)
+    );
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const getCheatMealList = async (info) => {
+  try {
+    return Promise.resolve(
+      await apiInstance.get(`${ApiConstants.CHEAT_MEAL}/${info}`)
+    );
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const getReportData = async (info) => {
+  try {
+    return Promise.resolve(
+      await apiInstance.get(`${ApiConstants.REPORT}/${info}`)
+    );
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

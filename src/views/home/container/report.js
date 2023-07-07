@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,19 +9,35 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Container } from "@mui/material";
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+import { userReportData, getLoggedUserData } from "../selectors";
+import { getReportDataRequest } from "../actions";
 
-const rows = [
-  createData("2023 Jul 07", 80, "Yes", "1 hour"),
-  createData("2023 Jul 08", 79.5, "Yes", "1.5 hour"),
-  createData("2023 Jul 09", 79, "Yes", "2 hour"),
-  createData("2023 Jul 10", 78.5, "Yes", "1 hour"),
-  createData("2023 Jul 11", 78, "Yes", "1 hour"),
-];
+const ReportPage = () => {
+  const dispatch = useDispatch();
+  const [reportData, setReportData] = useState([]);
+  const cheatMealListData = useSelector((state) => userReportData(state));
+  const userData = useSelector((state) => getLoggedUserData(state));
 
-export default function BasicTable() {
+  const getReportData = useCallback(
+    (info) => {
+      dispatch(getReportDataRequest(info));
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    getReportData({
+      userId: userData.id,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (cheatMealListData) {
+      console.log(cheatMealListData);
+      setReportData(cheatMealListData);
+    }
+  }, [cheatMealListData]);
+
   return (
     <Container>
       <TableContainer component={Paper}>
@@ -34,22 +51,25 @@ export default function BasicTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell>{row.calories}</TableCell>
-                <TableCell>{row.fat}</TableCell>
-                <TableCell>{row.carbs}</TableCell>
-              </TableRow>
-            ))}
+            {reportData &&
+              reportData.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.date}
+                  </TableCell>
+                  <TableCell>{row.weight}</TableCell>
+                  <TableCell>{row.workout}</TableCell>
+                  <TableCell>{row.duration}</TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
     </Container>
   );
-}
+};
+
+export default ReportPage;

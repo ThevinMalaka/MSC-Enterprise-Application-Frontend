@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Typography,
   TextField,
@@ -16,12 +17,34 @@ import {
   Container,
 } from "@mui/material";
 
+import { addCheatMealRequest, getCheatMealListRequest } from "../actions";
+import { cheatMealList, getLoggedUserData } from "../selectors";
+
 const CheatMealPage = () => {
+  const dispatch = useDispatch();
   const [cheatMeal, setCheatMeal] = useState("");
   const [mealType, setMealType] = useState("");
   const [calories, setCalories] = useState("");
   const [date, setDate] = useState("");
   const [cheatMeals, setCheatMeals] = useState([]);
+
+  const cheatMealListData = useSelector((state) => cheatMealList(state));
+
+  const userData = useSelector((state) => getLoggedUserData(state));
+
+  const addCheatMeal = useCallback(
+    (info) => {
+      dispatch(addCheatMealRequest(info));
+    },
+    [dispatch]
+  );
+
+  const getCheatMealList = useCallback(
+    (info) => {
+      dispatch(getCheatMealListRequest(info));
+    },
+    [dispatch]
+  );
 
   const handleCheatMealChange = (event) => {
     setCheatMeal(event.target.value);
@@ -57,8 +80,27 @@ const CheatMealPage = () => {
       setMealType("");
       setCalories("");
       setDate("");
+      addCheatMeal({
+        cheatMeal,
+        mealType,
+        calories,
+        date,
+        userId: userData.id,
+      });
     }
   };
+
+  useEffect(() => {
+    if (cheatMealListData) {
+      setCheatMeals(cheatMealListData);
+    }
+  }, [cheatMealListData]);
+
+  useEffect(() => {
+    getCheatMealList({
+      userId: userData.id,
+    });
+  }, [getCheatMealList, userData.id]);
 
   return (
     <Container>

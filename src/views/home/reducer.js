@@ -1,5 +1,6 @@
 import createReducer from "../../utils/createReducer";
 import * as types from "./actionTypes";
+import { REPORTS, PREDICTIONS } from "../../hooks/constant";
 
 const initialState = {
   isLoggedIn: false,
@@ -7,32 +8,9 @@ const initialState = {
   workoutPlanEnroll: false,
   submitCompletedWorkoutStatus: false,
   userWeightList: [],
-  userPredictionData: [
-    {
-      date: "2023-07-05",
-      weight: 80,
-    },
-    {
-      date: "2023-07-06",
-      weight: 79.5,
-    },
-    {
-      date: "2023-07-07",
-      weight: 79,
-    },
-    {
-      date: "2023-07-08",
-      weight: 78.5,
-    },
-    {
-      date: "2023-07-09",
-      weight: 78,
-    },
-    {
-      date: "2023-07-10",
-      weight: 77.5,
-    },
-  ],
+  cheatMealList: [],
+  userReportData: REPORTS,
+  userPredictionData: PREDICTIONS,
 };
 
 export const homeReducers = createReducer(initialState, {
@@ -77,6 +55,18 @@ export const homeReducers = createReducer(initialState, {
     return {
       ...state,
       userWeightList: action.info,
+    };
+  },
+  [types.GET_CHEAT_MEAL_LIST_SUCCESS](state, action) {
+    return {
+      ...state,
+      cheatMealList: true,
+    };
+  },
+  [types.GET_REPORT_DATA_SUCCESS](state, action) {
+    return {
+      ...state,
+      userReportData: action.info,
     };
   },
 });
